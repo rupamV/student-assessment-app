@@ -1,0 +1,21 @@
+<app-navbar title="Examiner Dashboard"></app-navbar>
+<section class="manage-exams">
+    <h2>Manage Exams</h2>
+    <!-- @if(exams.length === 0){
+      <p class="no-exam">No exams found. Please add some exams.</p>}
+    @else{ -->
+      <div class="exam-cards">
+        <div 
+          class="exam-card" 
+          *ngFor="let exam of exams" 
+          
+        >
+          <div class="exam-card-content">
+            <h3>{{ exam.title }}</h3>
+            <p><strong>Assigned To:</strong> {{ exam.assignedTo }}</p>
+          </div>
+        </div>
+      </div>
+      
+  <!-- } -->
+  </section>
