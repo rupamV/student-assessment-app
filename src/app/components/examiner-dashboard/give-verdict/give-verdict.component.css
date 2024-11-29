@@ -1,0 +1,35 @@
+.give-verdict {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .give-verdict h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+  
+  .give-verdict .verdict {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .give-verdict label {
+    font-size: 1.2rem;
+    margin-right: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

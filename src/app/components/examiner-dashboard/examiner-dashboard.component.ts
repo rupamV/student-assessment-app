@@ -1,32 +1,56 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExamService } from '../../services/exam.service';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-examiner-dashboard',
   standalone: true,
   imports: [CommonModule, NavbarComponent],
   templateUrl: './examiner-dashboard.component.html',
-  styleUrl: './examiner-dashboard.component.css',
+  styleUrls: ['./examiner-dashboard.component.css'],
 })
-export class ExaminerDashboardComponent {
-  exams: any = [
-    { title: 'Math Exam', assignedTo: 'John Doe' },
-    { title: 'Science Exam', assignedTo: 'Jane Smith' },
-    { title: 'History Exam', assignedTo: 'Alice Johnson' },
-  ];
-  responses: any;
+export class ExaminerDashboardComponent implements OnInit {
+  exams: any[] = []; // Stores all exams
 
-  constructor(private examService: ExamService) {
-    // this.refreshData();
-  }
+  constructor(private examService: ExamService, private router: Router) {}
 
-  async deleteExam(exam: any) {
-    await this.examService.deleteExam(exam);
+  ngOnInit(): void {
     this.refreshData();
   }
-  async refreshData() {
-    this.exams = await this.examService.getExams();
-    this.responses = await this.examService.getResponses();
+
+  // Fetches all exams and updates the dashboard
+  async refreshData(): Promise<void> {
+    try {
+      this.exams = await this.examService.getExams();
+    } catch (error) {
+      console.error('Error fetching exams:', error);
+    }
+  }
+
+  // Deletes an exam
+  async deleteExam(exam: any): Promise<void> {
+    try {
+      await this.examService.deleteExam({ title: exam.title });
+      await this.refreshData();
+    } catch (error) {
+      console.error('Error deleting exam:', error);
+    }
+  }
+
+  // Navigate to the Add Exam page
+  addExamPage(): void {
+    this.router.navigate(['dashboard/examiner/add-exam']);
+  }
+
+  // Returns the keys of the object or an empty array if the object is undefined/null
+  getKeys(obj: any): string[] {
+    return obj ? Object.keys(obj) : [];
+  }
+
+  // Navigate to the 'Give Verdict' page
+  viewSubmission(examId: string, userEmail: string): void {
+    this.router.navigate(['dashboard/examiner/give-verdict', examId]);
   }
 }

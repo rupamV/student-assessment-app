@@ -1,0 +1,14 @@
+<app-navbar title="Student Dashboard"></app-navbar>
+<div *ngIf="exam">
+  <h2>{{ exam.title }}</h2>
+  <p>{{ exam.question }}</p>
+
+  <div *ngFor="let option of exam.options">
+    <label>
+      <input type="radio" [name]="exam.title" [value]="option" />
+      {{ option }}
+    </label>
+  </div>
+
+  <button (click)="submitExam()">Submit Exam</button>
+</div>

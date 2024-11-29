@@ -1,0 +1,34 @@
+<app-navbar title="Give Verdict"></app-navbar>
+
+<section class="give-verdict">
+  <div *ngIf="!submission">
+    <p>Loading submission...</p>
+  </div>
+
+  <div *ngIf="submission">
+    <h2>Submission Details</h2>
+    <p><strong>User:</strong> {{ submission.studentEmail}}</p>
+    <p><strong>Answer:</strong> {{ submission.answer }}</p>
+
+    <div class="verdict">
+      <label>
+        <input
+          type="radio"
+          name="verdict"
+          value="Pass"
+          [(ngModel)]="verdict"
+        /> Pass
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="verdict"
+          value="Fail"
+          [(ngModel)]="verdict"
+        /> Fail
+      </label>
+    </div>
+
+    <button (click)="saveVerdict()">Submit Verdict</button>
+  </div>
+</section>

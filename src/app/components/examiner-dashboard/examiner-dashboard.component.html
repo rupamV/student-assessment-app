@@ -1,21 +1,37 @@
 <app-navbar title="Examiner Dashboard"></app-navbar>
+
 <section class="manage-exams">
+  <div class="title">
     <h2>Manage Exams</h2>
-    <!-- @if(exams.length === 0){
-      <p class="no-exam">No exams found. Please add some exams.</p>}
-    @else{ -->
-      <div class="exam-cards">
-        <div 
-          class="exam-card" 
-          *ngFor="let exam of exams" 
-          
-        >
-          <div class="exam-card-content">
-            <h3>{{ exam.title }}</h3>
-            <p><strong>Assigned To:</strong> {{ exam.assignedTo }}</p>
-          </div>
-        </div>
+    <button (click)="addExamPage()">Add Exam</button>
+  </div>
+
+  <!-- If no exams are found -->
+  <div *ngIf="exams.length === 0" class="no-exam">
+    <p>No exams found. Please add some exams.</p>
+  </div>
+
+  <!-- If exams exist, display them -->
+  <div *ngIf="exams.length > 0" class="exam-cards">
+    <div class="exam-card" *ngFor="let exam of exams">
+      <div class="exam-card-content">
+        <h3>{{ exam.title }}</h3>
+        <p><strong>Assigned To:</strong> {{ exam.assignedTo.join(', ') }}</p>
+        <p><strong>Status:</strong></p>
+        <ul>
+          <li *ngFor="let user of getKeys(exam.status)">
+            {{ user }}: {{ exam.status[user] }}
+            <!-- Display "View Submission" button if status is 'attempted' -->
+            <button
+              *ngIf="exam.status[user] === 'attempted'"
+              (click)="viewSubmission(exam.id, user)"
+            >
+              View Submission
+            </button>
+          </li>
+        </ul>
+        <button class="delete" (click)="deleteExam(exam)">Delete</button>
       </div>
-      
-  <!-- } -->
-  </section>
+    </div>
+  </div>
+</section>

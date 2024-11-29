@@ -110,7 +110,7 @@ export class AuthComponent {
 
     try {
       await this.fireauth.register(email, password, role);
-      this.router.navigate(['/auth']);
+      this.isLoginMode = true;
     } catch (error: any) {
       alert(`Registration failed: ${error.message}`);
     }

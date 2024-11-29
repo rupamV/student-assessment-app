@@ -1,0 +1,19 @@
+<app-navbar title="Result"></app-navbar>
+
+<section class="result-container">
+  <div class="result-card">
+    <h2>Exam Result</h2>
+    <p><strong>Student Email:</strong> {{ userEmail }}</p>
+
+    <div *ngIf="verdict">
+      <p><strong>Verdict:</strong> {{ verdict }}</p>
+    </div>
+    <div *ngIf="!verdict">
+      <p>The verdict is not yet available. Please check back later.</p>
+    </div>
+
+    <button class="back-btn" (click)="navigateToDash()">
+      Back to Dashboard
+    </button>
+  </div>
+</section>

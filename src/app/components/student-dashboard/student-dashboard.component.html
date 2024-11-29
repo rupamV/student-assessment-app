@@ -1,1 +1,16 @@
-<p>student-dashboard works!</p>
+<app-navbar title="Student Dashboard"></app-navbar>
+
+<div *ngFor="let exam of assignedExams">
+  <h3>{{ exam.title }}</h3>
+
+  <span *ngIf="exam.status[currentUserEmail] === 'pending'">Status: Pending</span>
+  <span *ngIf="exam.status[currentUserEmail] === 'attempted'">Status: Attempted</span>
+
+  <button *ngIf="exam.status[currentUserEmail] === 'pending'" (click)="onTakeExam(exam.id)">
+    Take Exam
+  </button>
+
+  <button *ngIf="exam.status[currentUserEmail] === 'attempted'" (click)="onViewResult(exam.id)">
+    View Result
+  </button>
+</div>
