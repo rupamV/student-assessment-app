@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 
 // Define the Exam interface explicitly
 export interface Exam {
-  questions: any;
   id: string;
   title: string;
   assignedTo: string[];

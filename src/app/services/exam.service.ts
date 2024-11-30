@@ -64,7 +64,6 @@ export class ExamService {
 
     return querySnapshot.docs.map((doc) => {
       const data = doc.data();
-      console.log(data);
 
       return {
         ...data,
