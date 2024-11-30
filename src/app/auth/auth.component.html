@@ -1,0 +1,61 @@
+<div class="login-container">
+    <div class="login-box">
+      <div class="login-header"></div>
+      <div class="login-body">
+        <div class="login-form-container">
+          <div class="login-form-wrapper">
+            <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="login-form">
+              <div class="login-title">
+                <h4>{{ isLoginMode ? 'Login' : 'Register' }}</h4>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': authForm.get('email')?.invalid && authForm.get('email')?.touched }"
+                />
+                <div *ngIf="authForm.get('email')?.invalid && authForm.get('email')?.touched" class="error-message">
+                  Valid email is required.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  id="password"
+                  type="password"
+                  formControlName="password"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': authForm.get('password')?.invalid && authForm.get('password')?.touched }"
+                />
+                <div *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched" class="error-message">
+                  Password must be at least 6 characters long.
+                </div>
+              </div>
+              <div *ngIf="!isLoginMode" class="form-group">
+                <label for="role">Role</label>
+                <select id="role" formControlName="role" class="form-control">
+                  <option value="" disabled>Select a role</option>
+                  <option value="examiner">Examiner</option>
+                  <option value="student">Student</option>
+                </select>
+                <div *ngIf="authForm.get('role')?.invalid && authForm.get('role')?.touched" class="error-message">
+                  Role is required.
+                </div>
+              </div>
+              <button type="submit" class="btn-login">{{ isLoginMode ? 'Login' : 'Register' }}</button>
+              <div class="register-link-container">
+                <a (click)="switchMode()" class="register-link">
+                  {{ isLoginMode ? 'Need Account? Register' : 'Have an account? Login' }}
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="login-footer"></div>
+    </div>
+  </div>
+  

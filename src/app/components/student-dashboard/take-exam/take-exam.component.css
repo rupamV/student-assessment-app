@@ -1,0 +1,58 @@
+/* Basic styling for the container */
+div {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styling */
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Question text styling */
+p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Styling for the options */
+.option {
+  display: block;
+  margin: 5px;
+  font-size: 16px;
+  color: #333;
+  padding: 20px 10px;
+  border-radius: 4px;
+  border: 1px solid #f1f1f1;
+}
+
+input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* Button or action container styling */
+.action-button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Optional: Add a subtle hover effect on the options */
+.option:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}

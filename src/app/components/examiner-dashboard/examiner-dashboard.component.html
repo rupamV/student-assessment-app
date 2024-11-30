@@ -1,0 +1,47 @@
+<app-navbar title="Examiner Dashboard"></app-navbar>
+<section class="manage-exams">
+  <div class="dashboard-header">
+    <h2>Manage Exams</h2>
+    <button class="add-exam-button" (click)="addExam()">Add Exam</button>
+  </div>
+  @if(loading){
+  <p class="loading">Loading exams...</p>
+  } @else { @if(exams.length === 0){
+  <p class="no-exam">No exams found. Please add some exams.</p>
+  } @else{
+  <div class="exam-cards">
+    <div class="exam-card" *ngFor="let exam of exams">
+      <div class="exam-card-content">
+        <h3>{{ exam.title }}</h3>
+        <p>
+          <strong>Assigned To:</strong>
+          {{ getUserById(exam.assignedTo).email }}
+        </p>
+        <p><strong>Status:</strong> {{ getStatus(exam.status) }}</p>
+      </div>
+      <div class="actions">
+        @if(exam.status === 'pending'){
+        <button class="action-button" (click)="editExam(exam.id)">Edit</button>
+        <button class="delete-btn" (click)="deleteExam(exam.id)">Delete</button>
+        } @else { @if(exam.verdict === 'pending'){
+        <button
+          class="action-button"
+          [routerLink]="['/dashboard/examiner/', exam.id]"
+        >
+          Give Verdict
+        </button>
+        } @else {
+        <p
+          class="action-button"
+          [ngClass]="exam.verdict === 'pass' ? 'pass' : 'fail'"
+        >
+          <strong>Verdict:</strong>
+
+          {{ exam.verdict | titlecase }}
+        </p>
+        } }
+      </div>
+    </div>
+  </div>
+  } }
+</section>

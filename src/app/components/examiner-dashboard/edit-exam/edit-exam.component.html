@@ -1,0 +1,136 @@
+<app-navbar title="Examiner Dashboard"></app-navbar>
+<div class="add-exam-container">
+  <h1>Edit Exam</h1>
+  @if (loading) {
+  <p class="loading">Loading exam...</p>
+  } @else{
+  <form [formGroup]="examForm" (ngSubmit)="onSubmit()">
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title">Exam Title</label>
+      <input
+        id="title"
+        type="text"
+        formControlName="title"
+        placeholder="Enter exam title"
+        [class.invalid]="
+          examForm.controls['title'].invalid &&
+          examForm.controls['title'].touched
+        "
+      />
+      <div
+        class="error"
+        *ngIf="
+          examForm.controls['title'].hasError('required') &&
+          examForm.controls['title'].touched
+        "
+      >
+        Title is required.
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          examForm.controls['title'].hasError('minlength') &&
+          examForm.controls['title'].touched
+        "
+      >
+        Title must be at least 3 characters long.
+      </div>
+    </div>
+
+    <!-- Question -->
+    <div class="form-group">
+      <label for="question">Question</label>
+      <input
+        id="question"
+        formControlName="question"
+        placeholder="Enter exam question"
+        [class.invalid]="
+          examForm.controls['question'].invalid &&
+          examForm.controls['question'].touched
+        "
+      />
+      <div
+        class="error"
+        *ngIf="
+          examForm.controls['question'].hasError('required') &&
+          examForm.controls['question'].touched
+        "
+      >
+        Question is required.
+      </div>
+    </div>
+
+    <!-- Options -->
+    <div formArrayName="options" class="form-group">
+      <label>Options</label>
+      <div *ngFor="let option of options.controls; let i = index">
+        <div class="option-group">
+          <input
+            type="text"
+            [formControlName]="i"
+            placeholder="Option {{ i + 1 }}"
+            [class.invalid]="option.invalid && option.touched"
+          />
+          <button
+            type="button"
+            (click)="removeOption(i)"
+            *ngIf="options.length > 1"
+          >
+            Remove
+          </button>
+        </div>
+        <div class="error" *ngIf="option.invalid && option.touched">
+          Option {{ i + 1 }} is required.
+        </div>
+      </div>
+      <button type="button" (click)="addOption()">Add Option</button>
+      <div
+        *ngIf="
+          options.controls.length === 0 && examForm.get('options')?.touched
+        "
+        class="error"
+      >
+        At least one option is required.
+      </div>
+    </div>
+
+    <!-- Assigned To -->
+    <div class="form-group">
+      <label for="assignedTo">Assign To </label>
+      <select
+        id="assignedTo"
+        type="text"
+        formControlName="assignedTo"
+        placeholder="Enter email addresses"
+        class="students-select"
+        [class.invalid]="
+          examForm.controls['assignedTo'].invalid &&
+          examForm.controls['assignedTo'].touched
+        "
+      >
+        @for(student of students; track student.uid ){
+        <option [value]="student.uid">{{ student.email }}</option>
+        }
+      </select>
+      <div
+        class="error"
+        *ngIf="
+          examForm.controls['assignedTo'].hasError('required') &&
+          examForm.controls['assignedTo'].touched
+        "
+      >
+        Exam should be assigned to a student.
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      [class.disabled]="!isFormDirty()"
+      [disabled]="!isFormDirty()"
+    >
+      Update
+    </button>
+  </form>
+  }
+</div>

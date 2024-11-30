@@ -1,0 +1,34 @@
+<app-navbar title="Student Dashboard"></app-navbar>
+<section class="manage-exams">
+  <h2>My Exams</h2>
+  @if(loading){
+  <p class="loading">Loading exams...</p>
+  } @else { @if(exams.length === 0){
+  <p class="no-exam">No exams found</p>
+  } @else{
+  <div class="exam-cards">
+    <div class="exam-card" *ngFor="let exam of exams">
+      <div class="exam-card-content">
+        <h3>{{ exam.title }}</h3>
+        <p><strong>Status:</strong> {{ getStatus(exam.status) }}</p>
+      </div>
+      <div class="actions">
+        @if(exam.status === 'pending'){
+        <button class="action-button" (click)="takeExam(exam.id)">
+          Take Exam
+        </button>
+        } @else {
+        <p
+          class="action-button"
+          [ngClass]="exam.verdict === 'pass' ? 'pass' : (exam.verdict === 'pending' ? 'pending' : 'fail')"
+        >
+          <strong>Verdict:</strong>
+
+          {{ exam.verdict | titlecase}}
+        </p>
+        } 
+      </div>
+    </div>
+  </div>
+  } }
+</section>

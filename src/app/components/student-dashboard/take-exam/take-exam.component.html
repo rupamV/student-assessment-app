@@ -1,0 +1,24 @@
+<app-navbar title="Student Dashboard"></app-navbar>
+<div *ngIf="examDetails">
+  <h2>{{ examDetails.title }}</h2>
+  <p>Question: {{ examDetails.question }}</p>
+  @for(option of examDetails.options; track option ) {
+  <label class="option">
+    <input
+      type="radio"
+      name="option"
+      [value]="option"
+      [(ngModel)]="userResponse"
+      [disabled]="isSubmitting"
+    />
+    {{ option | titlecase }}
+  </label>
+  }
+  <button
+    class="action-button"
+    (click)="submitExam()"
+    [class.disabled]="isSubmitting"
+  >
+    {{ isSubmitting ? "Submitting..." : "Submit" }}
+  </button>
+</div>

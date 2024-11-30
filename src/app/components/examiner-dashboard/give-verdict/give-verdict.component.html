@@ -1,0 +1,36 @@
+<app-navbar title="Examiner Dashboard"></app-navbar>
+
+<div *ngIf="examDetails">
+  <h2>{{ examDetails.title }}</h2>
+  <p>Assigned to: {{ getUserById(examDetails.assignedTo).email }}</p>
+  <p>Question: {{ examDetails.question }}</p>
+  <p>Response: {{ examDetails.response }}</p>
+  <div class="actions">
+    <button
+      [ngStyle]="{
+        backgroundColor: '#ff4d4d',
+        color: 'white',
+        border: 'none',
+        padding: '10px 20px',
+        borderRadius: '5px',
+        cursor: 'pointer'
+      }"
+      (click)="giveVerdict('fail')"
+    >
+      Fail
+    </button>
+    <button
+      [ngStyle]="{
+        backgroundColor: '#4CAF50',
+        color: 'white',
+        border: 'none',
+        padding: '10px 20px',
+        borderRadius: '5px',
+        cursor: 'pointer'
+      }"
+        (click)="giveVerdict('pass')"
+    >
+      Pass
+    </button>
+  </div>
+</div>
