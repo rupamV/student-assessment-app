@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ### **Task: Exam Portal**
+=======
+### live-https://vidyarthi-pariksha.netlify.app/
+### **Task : Exam Portal**
+>>>>>>> 267bdf07d5f199cedcad848e96552efbf48dcde3
 
 Add this to your readme file.
 
