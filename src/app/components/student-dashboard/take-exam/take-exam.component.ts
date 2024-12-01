@@ -53,6 +53,7 @@ export class TakeExamComponent {
       response: this.userResponse,
       status: 'attempted',
     };
+    // console.log('Updated Exam Data:', updatedExamData);
     this.examService
       .updateExam(updatedExamData)
       .then(

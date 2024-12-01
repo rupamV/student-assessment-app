@@ -12,11 +12,15 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 export const routes: Routes = [
   {
     path: '',
-    component: HomepageComponent
+    component: HomepageComponent,
+  },
+  {
+    path: 'homepage',
+    component: HomepageComponent,
   },
   {
     path: 'auth',
-    component: AuthComponent
+    component: AuthComponent,
   },
   {
     path: 'dashboard/examiner',

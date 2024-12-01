@@ -39,7 +39,7 @@ export class AuthComponent {
   // Switch between login and registration modes
   switchMode() {
     this.isLoginMode = !this.isLoginMode;
-    this.authForm.reset(); // Reset form when switching modes
+    this.authForm.reset();
   }
 
   async onSubmit() {
@@ -110,7 +110,8 @@ export class AuthComponent {
 
     try {
       await this.fireauth.register(email, password, role);
-      this.router.navigate(['/auth']);
+      this.isLoginMode = true;
+      this.router.navigateByUrl('/auth');
     } catch (error: any) {
       alert(`Registration failed: ${error.message}`);
     }

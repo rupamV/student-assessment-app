@@ -1,4 +1,4 @@
-### **Task 3: Exam Portal**
+### **Task: Exam Portal**
 
 Add this to your readme file.
 

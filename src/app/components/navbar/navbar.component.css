@@ -2,26 +2,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
-  padding: 10px 20px;
-  color: white;
+  padding: 15px 20px;
+  background-color: #333;  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-title {
-  font-size: 1.5em;
+  font-size: 24px;
   font-weight: bold;
+  color: #ffffff;
 }
 
 .logout-button {
-  background-color: #f44336;
-  color: white;
+  background: none;
   border: none;
-  padding: 10px 20px;
+  color:  #ffffff;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 1em;
-  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.logout-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 100%;
+  height: 2px;
+  background-color: red;
+  transition: left 0.3s ease;
 }
 
 .logout-button:hover {
-  background-color: #d32f2f;
+  color: red;
+}
+
+.logout-button:hover::after {
+  left: 0;
 }
