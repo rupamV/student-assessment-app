@@ -50,6 +50,7 @@ export class TakeExamComponent {
     this.isSubmitting = true;
     const updatedExamData: Exam = {
       ...this.examDetails,
+      id: this.examId,
       response: this.userResponse,
       status: 'attempted',
     };

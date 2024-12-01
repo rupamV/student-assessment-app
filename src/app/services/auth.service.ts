@@ -17,6 +17,7 @@ import {
   getDocs,
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { UserService } from './user.service';
 
 interface CurrentUser {
   uid: string;
@@ -51,7 +52,6 @@ export class AuthService {
 
     return null;
   }
-  isVerified: boolean = false;
 
   async login(email: string, password: string): Promise<User> {
     try {
@@ -60,20 +60,16 @@ export class AuthService {
         email,
         password
       );
-      const user = res.user; // User object directly from the signIn response
-      this.currentUser = await this.getUserData(email);
-
-      // Check if the email is verified
-      if (user.emailVerified) {
-        this.isVerified = true; // Set isVerified to true if email is verified
-        sessionStorage.setItem('user', JSON.stringify(user));
-        return res.user;
-      } else {
-        this.isVerified = false; // Email is not verified, set isVerified to false
-        throw new Error('Please verify your email address.');
+      if (res.user?.emailVerified === false) {
+        throw new Error('Please verify your email address to login.');
       }
+      const user = await this.getUserData(email);
+      this.currentUser = user;
+      sessionStorage.setItem('user', JSON.stringify(user));
+
+      return res.user;
     } catch (error: any) {
-      throw new Error(`${error.message}`);
+      throw new Error(`Login failed: ${error.message}`);
     }
   }
 
@@ -92,10 +88,9 @@ export class AuthService {
         role,
       });
 
-      // Send the email verification link and check status
-      this.isVerified = await this.sendEmailForVerification(res.user);
+      const isVerified = await this.sendEmailForVerification(res.user);
     } catch (error: any) {
-      throw new Error(`Registration failed: ${error.message}`);
+      throw new Error(` ${error.message}`);
     }
   }
 
@@ -103,7 +98,7 @@ export class AuthService {
     let res = false;
     await sendEmailVerification(user)
       .then(() => {
-        alert('Verification email sent! Please verify your email address.');
+        alert('Verification email sent!, Please verify your email address.');
         res = true;
       })
       .catch(() => {
@@ -122,7 +117,7 @@ export class AuthService {
 
       this.router.navigate(['/auth']);
     } catch (error: any) {
-      alert(`Logout failed: ${error.message}`);
+      alert(` ${error.message}`);
     }
   }
 

@@ -46,12 +46,14 @@
 .delete-btn:hover {
   background-color: #ff1a1a;
 }
+
 .no-exam {
   font-size: 18px;
   color: #888;
   text-align: center;
   margin-top: 20px;
 }
+
 .exam-cards {
   display: flex;
   flex-direction: column;
@@ -75,16 +77,27 @@
   transform: scale(1.01);
 }
 
+.exam-card-content {
+  flex: 1; /* Allow content to grow/shrink within the card */
+  min-width: 0; /* Important for ellipsis to work */
+}
+
 .exam-card-content h3 {
   margin: 0;
   font-size: 1.2rem;
   color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .exam-card-content p {
   margin: 5px 0;
   font-size: 1rem;
   color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .add-exam-button {
@@ -102,11 +115,13 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap; /* Allows wrapping for smaller screens */
 }
 
 .actions {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap; /* Wrap buttons on small screens */
 }
 
 .action-button {
@@ -128,6 +143,7 @@
   font-size: 1em;
   border-radius: 5px;
 }
+
 .fail {
   background-color: #ee0c04;
   cursor: not-allowed;
@@ -137,6 +153,7 @@
   font-size: 1em;
   border-radius: 5px;
 }
+
 .pending {
   background-color: #f0ad4e;
   cursor: not-allowed;
@@ -145,4 +162,37 @@
   padding: 10px 20px;
   font-size: 1em;
   border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .exam-card {
+    flex-direction: column; /* Stack content vertically */
+    align-items: flex-start;
+  }
+
+  .exam-card-content {
+    width: 100%; /* Full width for content */
+  }
+
+  .exam-card-content h3,
+  .exam-card-content p {
+    font-size: 1rem; /* Adjust text size */
+    max-width: 100%; /* Prevent overflowing */
+  }
+
+  .dashboard-header {
+    flex-direction: column; /* Stack header items */
+    gap: 10px;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .add-exam-button,
+  .action-button {
+    width: 100%; /* Full-width buttons for small screens */
+    text-align: center;
+  }
 }

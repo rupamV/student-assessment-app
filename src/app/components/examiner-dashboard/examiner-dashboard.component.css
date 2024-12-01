@@ -15,6 +15,7 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
+  overflow-x: auto; /* Enable scrolling on small screens */
 }
 
 .exam-table th,
@@ -22,6 +23,9 @@
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Ensure text does not overflow */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
 }
 
 .exam-table th {
@@ -46,12 +50,14 @@
 .delete-btn:hover {
   background-color: #ff1a1a;
 }
+
 .no-exam {
   font-size: 18px;
   color: #888;
   text-align: center;
   margin-top: 20px;
 }
+
 .exam-cards {
   display: flex;
   flex-direction: column;
@@ -79,13 +85,42 @@
   margin: 0;
   font-size: 1.2rem;
   color: #333;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
 }
 
 .exam-card-content p {
   margin: 5px 0;
   font-size: 1rem;
   color: #555;
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  max-width: 100%; /* Ensure it does not exceed the card width */
 }
+
+@media (max-width: 768px) {
+  .exam-card {
+    flex-direction: column; /* Stack card contents vertically */
+    align-items: flex-start;
+  }
+
+  .exam-card-content {
+    width: 100%; /* Allow content to take full width */
+  }
+
+  .exam-card-content h3,
+  .exam-card-content p {
+    font-size: 1rem; /* Adjust text size for smaller screens */
+  }
+
+  .exam-card-content p {
+    max-width: calc(100% - 20px); /* Adjust width to leave some padding */
+    font-size: 0.9rem; /* Slightly smaller font size */
+  }
+}
+
 
 .add-exam-button {
   background-color: #007bff;
@@ -102,11 +137,13 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 .actions {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap; /* Wrap buttons on small screens */
 }
 
 .action-button {
@@ -128,6 +165,7 @@
   font-size: 1em;
   border-radius: 5px;
 }
+
 .fail {
   background-color: #ee0c04;
   cursor: not-allowed;
@@ -136,4 +174,30 @@
   padding: 10px 20px;
   font-size: 1em;
   border-radius: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .exam-card {
+    flex-direction: column; /* Stack card contents vertically */
+    align-items: flex-start;
+  }
+
+  .exam-card-content h3,
+  .exam-card-content p {
+    font-size: 1rem; /* Adjust text size */
+  }
+
+  .dashboard-header {
+    flex-direction: column; /* Stack header contents */
+    gap: 10px;
+  }
+
+  .actions {
+    justify-content: center; /* Center buttons */
+  }
+
+  .exam-table {
+    font-size: 0.9rem; /* Adjust table font size */
+  }
 }
